@@ -1,6 +1,11 @@
+/**
+ * 
+ * @author Chirag Shah..
+ *
+ */
 import java.io.*;
 
-public class compute_a_posteriori {//Name: Chirag Hareshkumar Shah // UTA ID: 1001558824
+public class compute_a_posteriori {
 
 	public static void main(String args[]) throws IOException {
 		BufferedWriter output = new BufferedWriter(new FileWriter("results.txt"));
