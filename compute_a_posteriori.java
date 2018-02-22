@@ -8,24 +8,24 @@ import java.io.*;
 public class compute_a_posteriori {
 
 	public static void main(String args[]) throws IOException {
-		BufferedWriter output = new BufferedWriter(new FileWriter("results.txt"));
+		BufferedWriter outputObj = new BufferedWriter(new FileWriter("results.txt"));
 		
 		int counter[] = new int[2];
 		double cherrypc[] = { 1.00, 0.75, 0.50, 0.25, 0 };
 		double limepc[] = { 0, 0.25, 0.50, 0.75, 1.00 };
 		int prior[] = { 10, 20, 40, 20, 10 };
-		output.write("Observation Sequence Q: " + args[0]);
-		output.write("\r\n");
+		outputObj.write("Observation Sequence Q: " + args[0]);
+		outputObj.write("\r\n");
 		int leng = args[0].length();
-		output.write("Length of Q: " + leng);
-		output.write("\r\n");
+		outputObj.write("Length of Q: " + leng);
+		outputObj.write("\r\n");
 		for (int i = 0; i < leng; i++) {
 			if (args[0].charAt(i) == 'C' || args[0].charAt(i) == 'c') {
 				counter[0]++;
 			} else if (args[0].charAt(i) == 'L' || args[0].charAt(i) == 'l') {
 				counter[1]++;
 			} else {
-				System.out.println("There are invalid arguments at commandline");
+				System.out.println("There are invalid arguments at commandline..");
 				break;
 			}
 		}
@@ -40,8 +40,8 @@ public class compute_a_posteriori {
 		for (int k = 0; k < prob.length; k++) {
 			prob[k] = Math.round(sum_of_prob * prob[k] * 100000.0);
 			prob[k] = prob[k] / 100000.0;
-			output.write("P(h" + (k + 1) + "|Q) = " + prob[k]);
-			output.write("\r\n");
+			outputObj.write("P(h" + (k + 1) + "|Q) = " + prob[k]);
+			outputObj.write("\r\n");
 		}
 		double next_prob[] = new double[2];
 		for (int i = 0; i < prob.length; i++) {
@@ -52,9 +52,9 @@ public class compute_a_posteriori {
 			next_prob[j] = Math.round(next_prob[j] * 100000.0);
 			next_prob[j] = next_prob[j] / 100000.0;
 		}
-		output.write("Probability that the next candy we pick will be C, given Q: " + next_prob[0]);
-		output.write("\r\n");
-		output.write("Probability that the next candy we pick will be L, given Q: " + next_prob[1]);
-		output.close();
+		outputObj.write("Probability that the next candy we pick will be C, given Q: " + next_prob[0]);
+		outputObj.write("\r\n");
+		outputObj.write("Probability that the next candy we pick will be L, given Q: " + next_prob[1]);
+		outputObj.close();
 	}
 }
